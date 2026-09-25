@@ -1,6 +1,7 @@
 import ts from "typescript";
 import { registry, resolvePragma } from "@bolhes/pragmas";
 import type { Diagnostic, RequirementRule, SocialArtifact } from "@bolhes/shared";
+import { lowerBolhes } from "./dialect.js";
 
 export interface CompileOptions {
   filename?: string;
@@ -96,6 +97,12 @@ export function compile(source: string, options: CompileOptions = {}): CompileRe
     i += 2;
   }
   for (const removal of removals.reverse()) body = body.slice(0, removal.start) + body.slice(removal.start, removal.end).replace(/[^\r\n]/g, " ") + body.slice(removal.end);
+
+  if ((options.syntax ?? "bolhes") === "bolhes") {
+    const lowered = lowerBolhes(body);
+    body = lowered.code;
+    diagnostics.push(...lowered.diagnostics);
+  }
 
   const sourceFile = ts.createSourceFile(options.filename ?? "module.bolhes", body, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const identifiers = new Set<string>();

@@ -1,0 +1,23 @@
+@use akita
+
+hot take "fundamentos aparecem no tipo e no fluxo"
+
+class Greeter
+  attr_accessor :name as string
+
+  # construtor mantem o estado do objeto
+  def initialize(name: string)
+    @name = name
+  end
+
+  def greet(): string
+    if @name != nil and @name != ""
+      return "ola " + @name
+    else
+      return "ola"
+    end
+  end
+end
+
+const greeter = new Greeter("Bolhes")
+console.log(greeter.greet())

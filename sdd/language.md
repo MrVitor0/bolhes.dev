@@ -14,6 +14,12 @@ export const region = "sa-east-1";
 
 O JS emitido preserva o escopo de módulo. Takes ficam no artefato social. Sem pragma explícito, o pragma padrão é `bolha`.
 
-## Ainda não suportado
+## Limites atuais
 
-O lexer/parser próprio Ruby/Python descrito em `spec-driven-development/10-sintaxe-ruby-python.md`, blocos de take, sintaxe `do/end`, lowering de classes/campos e aliases sintáticos opt-in ainda estão pendentes. A implementação atual não transforma sintaxe por substituição textual.
+Ainda faltam blocos de take, sintaxe `do/end`, regioes `native ts/tsx`, aliases sintaticos opt-in, retorno implicito, continuacao multilinea e mapeamento completo de origem. A implementacao nao faz substituicao textual global.
+
+## Dialeto Ruby/Python implementado parcialmente
+
+O modo padrao baixa blocos simples de classe e metodo, construtor `initialize`, campos `@campo`, `attr_accessor`, controles `if/elif/else`, `while`, `for/in`, `try/catch/finally`, `nil`, `and/or/not` e comentarios de linha `#`. Cada bloco exige `end`. Veja `examples/ruby-python.bolhes`.
+
+`class Nome < Base` gera `extends Base` e chamadas `super()` continuam como JavaScript normal, mas o compiler ainda nao valida a ordem de inicializacao da classe derivada. Retorno implicito, continuacao multilinea, regioes `native ts/tsx` e mapeamento completo de origem continuam pendentes. Metodos devem usar `return` explicito por enquanto.
