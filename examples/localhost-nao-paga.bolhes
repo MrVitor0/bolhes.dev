@@ -1,0 +1,7 @@
+@use guara
+
+hot take "localhost nao paga"
+
+export async function deploy(region: string): Promise<string> {
+  return `https://${region}.example.test`;
+}

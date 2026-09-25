@@ -1,2 +1,11 @@
 # personality information
 personality.md
+node_modules/
+dist/
+**/dist/
+*.tsbuildinfo
+*.social.json
+*.quote.txt
+
+# high-level sdd
+/sdd
