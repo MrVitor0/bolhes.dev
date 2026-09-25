@@ -1,0 +1,13 @@
+@use akita
+
+hot take "historia da computacao ajuda a separar ferramenta de fundamento"
+
+export def chooseStorage(): string
+  const source: string = "dados de produto"
+  const durable: boolean = true
+  if durable
+    "persistencia com contrato"
+  else
+    source
+  end
+end

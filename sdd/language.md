@@ -16,10 +16,12 @@ O JS emitido preserva o escopo de módulo. Takes ficam no artefato social. Sem p
 
 ## Limites atuais
 
-Ainda faltam blocos de take, sintaxe `do/end`, regioes `native ts/tsx`, aliases sintaticos opt-in, retorno implicito, continuacao multilinea e mapeamento completo de origem. A implementacao nao faz substituicao textual global.
+Ainda faltam blocos de take e sintaxe `do/end`, regioes `native tsx`, aliases sintaticos além do profile `pt-br`, continuacao multilinea e mapeamento completo de origem. A implementacao nao faz substituicao textual global.
 
 ## Dialeto Ruby/Python implementado parcialmente
 
 O modo padrao baixa blocos simples de classe e metodo, construtor `initialize`, campos `@campo`, `attr_accessor`, controles `if/elif/else`, `while`, `for/in`, `try/catch/finally`, `nil`, `and/or/not` e comentarios de linha `#`. Cada bloco exige `end`. Veja `examples/ruby-python.bolhes`.
 
-`class Nome < Base` gera `extends Base` e chamadas `super()` continuam como JavaScript normal, mas o compiler ainda nao valida a ordem de inicializacao da classe derivada. Retorno implicito, continuacao multilinea, regioes `native ts/tsx` e mapeamento completo de origem continuam pendentes. Metodos devem usar `return` explicito por enquanto.
+`class Nome < Base` gera `extends Base` e chamadas `super()` continuam como JavaScript normal, mas o compiler ainda nao valida a ordem de inicializacao da classe derivada. Retorno implicito cobre expressao final simples e expressoes finais de ramos `if/else`; outros controles de fluxo exigem `return` explicito. Regioes multiline `native ts { ... }` mantem seu conteudo fora do lowering; JSX/TSX precisa de suporte dedicado.
+
+O profile `pt-br` e opt-in por `syntaxProfiles` na API `compile`. Ele reconhece `se condicao` e `senao` nos contextos de statement; sem o profile, nomes como `se` continuam identificadores comuns.

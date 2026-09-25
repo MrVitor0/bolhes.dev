@@ -1,0 +1,20 @@
+id: luke
+aliases: []
+kind: persona
+displayName: Luke Berry
+handle: "@LukeberryPi"
+gesture: interface e cuidado visual
+requiresTake: true
+errorCode: BOLHES_LUKE_REQUIREMENT_FAILED
+errorMessage: não passa no CSS 2wind
+refuses: []
+voice: detalhe visual, estado e tipografia
+quote: o código tá ok. a tela pede desculpa.
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - motion
+        - typography
+        - theme
+        - emptyState

@@ -1,0 +1,14 @@
+id: palestrinha
+aliases: []
+kind: persona
+displayName: Palestrinha
+handle: null
+gesture: números e argumentos de apresentação
+requiresTake: true
+errorCode: BOLHES_PALESTRINHA_REQUIREMENT_FAILED
+errorMessage: slide não sobe pra produção
+refuses: []
+voice: argumentação em tópicos
+quote: deixa eu contextualizar.
+rules:
+  - id: ast-contains-number

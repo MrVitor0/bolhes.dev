@@ -1,0 +1,19 @@
+id: akita
+aliases:
+  - akitando
+kind: persona
+displayName: Fábio Akita
+handle: "@AkitaOnRails"
+gesture: fundamentos, história da computação e crítica ao hype
+requiresTake: true
+errorCode: BOLHES_AKITA_REQUIREMENT_FAILED
+errorMessage: isso é curso de 6 meses compilado
+refuses:
+  - vibe
+  - linkedin
+  - 6meses
+voice: professoral, fundamentos antes do hype
+quote: se todo mundo te ama, ninguém liga pra você. inclusive esse hello world.
+rules:
+  - id: requires-type
+  - id: no-any

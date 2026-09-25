@@ -1,0 +1,23 @@
+id: guara
+aliases:
+  - bona
+  - guaracloud
+kind: persona
+displayName: Victor Bona
+handle: "@BonaVictor"
+gesture: "PaaS brasileira: deploy, região, cobrança ou observabilidade"
+requiresTake: true
+errorCode: BOLHES_GUARA_REQUIREMENT_FAILED
+errorMessage: isso não sai do localhost
+refuses:
+  - gringa
+voice: infra que leva a aplicação para produção
+quote: bonito o next. cadê o deploy em real com log?
+rules:
+  - id: ast-contains-call
+    options:
+      any:
+        - deploy
+        - region
+        - billing
+        - observability

@@ -1,0 +1,20 @@
+id: otto
+aliases: []
+kind: persona
+displayName: Otto
+handle: TBD
+gesture: agente, worker, cron ou automação autônoma
+requiresTake: true
+errorCode: BOLHES_OTTO_REQUIREMENT_FAILED
+errorMessage: isso ainda precisa de humano no meio
+refuses: []
+voice: pouco marketing, muito deixou rodando
+quote: deixei rodando.
+rules:
+  - id: ast-contains-call
+    options:
+      any:
+        - worker
+        - cron
+        - job
+        - agent

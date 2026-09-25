@@ -1,0 +1,20 @@
+id: himetrica
+aliases: []
+kind: persona
+displayName: Himetrica
+handle: "@wescld"
+gesture: analytics, eventos e decisões baseadas em uso
+requiresTake: true
+errorCode: BOLHES_HIMETRICA_REQUIREMENT_FAILED
+errorMessage: quem usa isso você não sabe
+refuses: []
+voice: pergunta pelos dados de uso
+quote: shipou. e quem de fato clicou?
+rules:
+  - id: ast-contains-call
+    options:
+      any:
+        - track
+        - event
+        - identify
+        - profile

@@ -7,6 +7,8 @@ export interface CompileOptions {
   filename?: string;
   target?: "js" | "ts";
   syntax?: "bolhes" | "js" | "ts" | "jsx" | "tsx";
+  syntaxProfiles?: readonly string[];
+  sourceMap?: boolean;
 }
 
 export interface CompileResult {
@@ -15,6 +17,7 @@ export interface CompileResult {
   target: "js" | "ts";
   pragmas: string[];
   social?: SocialArtifact;
+  map?: string;
   diagnostics: Diagnostic[];
 }
 
@@ -46,6 +49,7 @@ export function compile(source: string, options: CompileOptions = {}): CompileRe
         if (pragmaNames.includes(resolved.id)) diagnostics.push({ code: "BOLHES_DUPLICATE_PRAGMA", severity: "warning", message: `@${resolved.id} jÃ¡ foi declarado`, span: position(source, offset) });
         else pragmaNames.push(resolved.id);
       }
+      body += line.replace(/[^\r\n]/g, " ");
       offset += line.length;
       continue;
     }
@@ -99,7 +103,7 @@ export function compile(source: string, options: CompileOptions = {}): CompileRe
   for (const removal of removals.reverse()) body = body.slice(0, removal.start) + body.slice(removal.start, removal.end).replace(/[^\r\n]/g, " ") + body.slice(removal.end);
 
   if ((options.syntax ?? "bolhes") === "bolhes") {
-    const lowered = lowerBolhes(body);
+    const lowered = lowerBolhes(body, options.syntaxProfiles ?? []);
     body = lowered.code;
     diagnostics.push(...lowered.diagnostics);
   }
@@ -147,16 +151,22 @@ export function compile(source: string, options: CompileOptions = {}): CompileRe
   const tsResult = ts.transpileModule(body, {
     fileName: filename,
     reportDiagnostics: true,
-    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, jsx: ts.JsxEmit.Preserve }
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, jsx: ts.JsxEmit.Preserve, sourceMap: options.sourceMap, inlineSources: options.sourceMap }
   });
   for (const d of tsResult.diagnostics ?? []) {
     const start = d.start ?? 0;
     diagnostics.push({ code: `TS${d.code}`, severity: "error", message: ts.flattenDiagnosticMessageText(d.messageText, "\n"), span: position(source, start) });
   }
   if (diagnostics.some((d) => d.severity === "error")) return { ok: false, target, pragmas: active, diagnostics };
-  const code = target === "ts" ? body : tsResult.outputText;
+  const code = target === "ts" ? body : tsResult.outputText.replace(/sourceMappingURL=[^\r\n]+/, (directive) => directive.replace(/\.bolhes(?=\.js\.map$)/i, ""));
+  let map: string | undefined;
+  if (options.sourceMap && target === "js" && tsResult.sourceMapText) {
+    const parsedMap = JSON.parse(tsResult.sourceMapText) as { sourcesContent?: string[] };
+    parsedMap.sourcesContent = [source];
+    map = `${JSON.stringify(parsedMap)}\n`;
+  }
   const social: SocialArtifact = { schemaVersion: 1, compilerVersion: version, pragmas: active, takes, easterEggs: [] };
-  return { ok: true, code, target, pragmas: active, social, diagnostics };
+  return { ok: true, code, target, pragmas: active, social, map, diagnostics };
 }
 
 interface RuleFacts {

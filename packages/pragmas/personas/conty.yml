@@ -1,0 +1,21 @@
+id: conty
+aliases:
+  - rivera
+kind: persona
+displayName: Conty
+handle: "@onicolasrivera"
+gesture: creator economy, missões e loops sociais
+requiresTake: true
+errorCode: BOLHES_CONTY_REQUIREMENT_FAILED
+errorMessage: missão sem recompensa não entrega UGC de graça
+refuses: []
+voice: milestones e convocação da comunidade
+quote: isso aqui vira missão no app.
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - mission
+        - reward
+        - ugc
+        - share

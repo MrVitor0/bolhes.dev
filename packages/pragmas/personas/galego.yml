@@ -1,0 +1,17 @@
+id: galego
+aliases: []
+kind: persona
+displayName: Augusto Galego
+handle: "@RealGalego"
+gesture: lore satírico da bolha
+requiresTake: true
+errorCode: BOLHES_GALEGO_REQUIREMENT_FAILED
+errorMessage: você está interagindo com um bot
+refuses: []
+voice: revelação satírica, nunca afirmação factual
+quote: coincidência demais esse build passar de primeira.
+rules:
+  - id: comment-marker
+    options:
+      any:
+        - bot

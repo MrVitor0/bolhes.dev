@@ -6,4 +6,4 @@ Current pipeline: read header directives (default `bolha`) -> extract metadata t
 
 Implemented rule IDs: `requires-type`, `no-any`, `no-anonymous-function`, `ast-contains-call`, `ast-contains-identifier`, `ast-contains-url`, `ast-contains-number`, `take-contains-any`, `comment-marker`, `take-or-comment-marker`, `take-max-length` and `take-question`. Unknown rule IDs/options fail the registry build.
 
-The compiler uses `transpileModule` for isolated files. It does not provide semantic checking across files. Source maps remapped to `.bolhes` and the complete Ruby/Python parser and implicit returns are pending.
+The compiler uses `transpileModule` for isolated files. Project mode uses the TypeScript Program for semantic checking across `.ts` and `.bolhes` files. Source maps retain `.bolhes` source paths and source content in single-file and project builds; columns after lowering are approximate. The Ruby/Python parser remains a line-oriented subset; multiline statements, native TSX, remapped checker diagnostics and mapped runtime stack traces are pending.

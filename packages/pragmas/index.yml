@@ -1,0 +1,83 @@
+version: 0.1.0
+pragmas:
+  - id: bolha
+    file: personas/bolha.yml
+  - id: akita
+    file: personas/akita.yml
+  - id: deschamps
+    file: personas/deschamps.yml
+  - id: deyvin
+    file: personas/deyvin.yml
+  - id: montano
+    file: personas/montano.yml
+  - id: galego
+    file: personas/galego.yml
+  - id: tranquilao
+    file: personas/tranquilao.yml
+  - id: real
+    file: personas/real.yml
+  - id: fitfolio
+    file: personas/fitfolio.yml
+  - id: helio
+    file: personas/helio.yml
+  - id: conty
+    file: personas/conty.yml
+  - id: arara
+    file: personas/arara.yml
+  - id: banhos
+    file: personas/banhos.yml
+  - id: otto
+    file: personas/otto.yml
+  - id: vibe
+    file: personas/vibe.yml
+  - id: linkedin
+    file: personas/linkedin.yml
+  - id: 6meses
+    file: personas/6meses.yml
+  - id: junior
+    file: personas/junior.yml
+  - id: amargurado
+    file: personas/amargurado.yml
+  - id: palestrinha
+    file: personas/palestrinha.yml
+  - id: gringa
+    file: personas/gringa.yml
+  - id: rustacean
+    file: personas/rustacean.yml
+  - id: guara
+    file: personas/guara.yml
+  - id: kubo
+    file: personas/kubo.yml
+  - id: dalaz
+    file: personas/dalaz.yml
+  - id: noctral
+    file: personas/noctral.yml
+  - id: himetrica
+    file: personas/himetrica.yml
+  - id: luke
+    file: personas/luke.yml
+  - id: terron
+    file: personas/terron.yml
+  - id: nort
+    file: personas/nort.yml
+conflicts:
+  - - akita
+    - vibe
+  - - akita
+    - linkedin
+  - - akita
+    - 6meses
+  - - guara
+    - gringa
+  - - noctral
+    - 6meses
+  - - nort
+    - banhos
+  - - luke
+    - dalaz
+  - - himetrica
+    - helio
+  - - terron
+    - vibe
+  - - kubo
+    - akita

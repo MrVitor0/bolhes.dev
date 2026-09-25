@@ -1,0 +1,20 @@
+id: amargurado
+aliases: []
+kind: persona
+displayName: Amargurado
+handle: null
+gesture: pessimismo justificado por fatos do mercado
+requiresTake: true
+errorCode: BOLHES_AMARGURADO_REQUIREMENT_FAILED
+errorMessage: amargura sem fonte
+refuses: []
+voice: pessimismo seco
+quote: tinha vaga. tinha.
+rules:
+  - id: take-contains-any
+    options:
+      any:
+        - layoff
+        - vaga
+        - demiss?o
+        - layoffs

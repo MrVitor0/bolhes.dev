@@ -1,0 +1,13 @@
+id: new-capability
+aliases: []
+kind: technical
+displayName: Capability name
+handle: null
+gesture: One-line description of the technical behavior
+requiresTake: false
+rules: []
+errorCode: BOLHES_NEW_CAPABILITY_REQUIREMENT_FAILED
+errorMessage: Short compile diagnostic in pt-BR
+refuses: []
+voice: Technical pragma does not replace persona voice
+quote: Short reviewed quote template

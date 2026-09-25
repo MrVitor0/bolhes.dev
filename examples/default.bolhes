@@ -1,0 +1,6 @@
+hot take "compilador previsivel antes de compilador viral"
+
+export const compilerName = "Bolhes"
+export def isDeterministic(): boolean
+  true
+end

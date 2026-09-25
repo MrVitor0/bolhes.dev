@@ -1,20 +1,58 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { dirname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import YAML from "yaml";
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const sourcePath = resolve(packageRoot, "registry.yml");
+const sourcePath = resolve(packageRoot, "index.yml");
 const outputPath = resolve(packageRoot, "registry.json");
-const document = YAML.parseDocument(await readFile(sourcePath, "utf8"), { uniqueKeys: true });
-if (document.errors.length) throw new Error(document.errors.map((error) => error.message).join("\n"));
-const registry = document.toJS();
-const errors = validateRegistry(registry);
-if (errors.length) throw new Error(`Registry invÃ¡lido:\n${errors.map((error) => `- ${error}`).join("\n")}`);
+const indexDocument = YAML.parseDocument(await readFile(sourcePath, "utf8"), { uniqueKeys: true });
+if (indexDocument.errors.length) throw new Error(indexDocument.errors.map((error) => error.message).join("\n"));
+const index = indexDocument.toJS();
+const errors = validateIndex(index);
+const pragmas = [];
+if (Array.isArray(index?.pragmas)) for (const [position, entry] of index.pragmas.entries()) {
+  if (!isRecord(entry) || typeof entry.file !== "string" || !/^personas\/[a-z0-9-]+\.yml$/i.test(entry.file)) continue;
+  const personaPath = resolve(packageRoot, entry.file);
+  if (!personaPath.startsWith(`${resolve(packageRoot, "personas")}${sep}`)) { errors.push(`pragmas[${position}].file: path escapes personas directory`); continue; }
+  try {
+    const personaDocument = YAML.parseDocument(await readFile(personaPath, "utf8"), { uniqueKeys: true });
+    if (personaDocument.errors.length) { errors.push(`${entry.file}: ${personaDocument.errors.map((error) => error.message).join("; ")}`); continue; }
+    const pragma = personaDocument.toJS();
+    if (pragma?.id !== entry.id) errors.push(`${entry.file}.id: does not match index ID (${entry.id})`);
+    pragmas.push(pragma);
+  } catch { errors.push(`${entry.file}: file not found`); }
+}
+const registry = { version: index?.version, pragmas, conflicts: index?.conflicts };
+errors.push(...validateRegistry(registry));
+if (errors.length) throw new Error(`Invalid pragma registry:\n${errors.map((error) => `- ${error}`).join("\n")}`);
 await writeFile(outputPath, `${JSON.stringify(registry, null, 2)}\n`, "utf8");
 
 function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function validateIndex(value) {
+  const errors = [];
+  if (!isRecord(value)) return ["index: expected object"];
+  checkKeys(value, ["version", "pragmas", "conflicts"], "index", errors);
+  if (typeof value.version !== "string" || !value.version.trim()) errors.push("index.version: expected non-empty string");
+  if (!Array.isArray(value.pragmas)) errors.push("index.pragmas: expected list");
+  if (!Array.isArray(value.pragmas)) return errors;
+  const ids = new Set();
+  const paths = new Set();
+  value.pragmas.forEach((entry, position) => {
+    const path = `index.pragmas[${position}]`;
+    if (!isRecord(entry)) { errors.push(`${path}: expected object`); return; }
+    checkKeys(entry, ["id", "file"], path, errors);
+    if (typeof entry.id !== "string" || !/^[a-z0-9][a-z0-9-]*$/i.test(entry.id)) errors.push(`${path}.id: invalid format`);
+    else if (ids.has(entry.id.toLowerCase())) errors.push(`${path}.id: duplicate (${entry.id})`);
+    else ids.add(entry.id.toLowerCase());
+    if (typeof entry.file !== "string" || !/^personas\/[a-z0-9-]+\.yml$/i.test(entry.file)) errors.push(`${path}.file: expected personas/<id>.yml`);
+    else if (paths.has(entry.file.toLowerCase())) errors.push(`${path}.file: duplicate path`);
+    else paths.add(entry.file.toLowerCase());
+  });
+  return errors;
 }
 
 function validateRegistry(value) {

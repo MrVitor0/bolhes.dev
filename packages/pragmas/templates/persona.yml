@@ -1,0 +1,13 @@
+id: new-person
+aliases: []
+kind: persona
+displayName: Display name
+handle: TBD
+gesture: One-line description of a public product or contribution
+requiresTake: true
+rules: []
+errorCode: BOLHES_NEW_PERSON_REQUIREMENT_FAILED
+errorMessage: Short compile diagnostic in pt-BR
+refuses: []
+voice: Short public voice description
+quote: Reviewed quote template

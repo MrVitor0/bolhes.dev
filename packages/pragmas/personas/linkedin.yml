@@ -1,0 +1,16 @@
+id: linkedin
+aliases:
+  - faang
+kind: persona
+displayName: LinkedIn
+handle: null
+gesture: anúncio profissional e autopromoção
+requiresTake: true
+errorCode: BOLHES_LINKEDIN_REQUIREMENT_FAILED
+errorMessage: cringe detectado
+refuses:
+  - akita
+  - fitfolio
+voice: anúncio com emoji e CTA
+quote: seguimos construindo.
+rules: []

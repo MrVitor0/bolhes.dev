@@ -17,7 +17,12 @@ class Greeter
       return "ola"
     end
   end
+
+  def label(): string
+    "ola " + @name
+  end
 end
 
 const greeter = new Greeter("Bolhes")
 console.log(greeter.greet())
+console.log(greeter.label())

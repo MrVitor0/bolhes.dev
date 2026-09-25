@@ -1,6 +1,6 @@
 {
   "name": "@bolhes/cli", "version": "0.1.0", "private": true,
   "type": "module", "bin": { "bolhes": "./dist/index.js" },
-  "scripts": { "build": "tsc -p tsconfig.json", "test": "node --test", "bolhes": "node dist/index.js", "dev": "pnpm build && node dist/index.js" },
-  "dependencies": { "@bolhes/compiler": "workspace:*", "@bolhes/pragmas": "workspace:*" }
+  "scripts": { "build": "tsc -p tsconfig.json", "test": "node --test test/cli.test.mjs", "bolhes": "node dist/index.js", "dev": "pnpm build && node dist/index.js" },
+  "dependencies": { "@bolhes/compiler": "workspace:*", "@bolhes/pragmas": "workspace:*", "@bolhes/shared": "workspace:*" }
 }

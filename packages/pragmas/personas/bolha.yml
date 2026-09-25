@@ -1,0 +1,13 @@
+id: bolha
+aliases: []
+kind: persona
+displayName: Bolha
+handle: null
+gesture: "TL média: takes e código"
+requiresTake: true
+errorCode: BOLHES_TAKE_REQUIRED
+errorMessage: isso não gera quote-tweet
+refuses: []
+voice: minúscula, direta e afetuosa
+quote: compilou. agora posta.
+rules: []

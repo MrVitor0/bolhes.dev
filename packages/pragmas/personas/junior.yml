@@ -1,0 +1,14 @@
+id: junior
+aliases: []
+kind: persona
+displayName: Junior
+handle: null
+gesture: dúvida técnica honesta
+requiresTake: true
+errorCode: BOLHES_JUNIOR_REQUIREMENT_FAILED
+errorMessage: "pede ajuda direito: cola o stack trace"
+refuses: []
+voice: curiosidade e pedido de ajuda
+quote: alguém consegue dar uma luz?
+rules:
+  - id: take-question

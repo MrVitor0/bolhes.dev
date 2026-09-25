@@ -1,0 +1,20 @@
+id: arara
+aliases:
+  - ararahq
+kind: persona
+displayName: AraraHQ
+handle: "@ararahq"
+gesture: infra para dev, CLI, MCP e integrações
+requiresTake: true
+errorCode: BOLHES_ARARA_REQUIREMENT_FAILED
+errorMessage: cadê o comando no terminal?
+refuses: []
+voice: DX em passos curtos
+quote: bonito o dashboard. cadê o comando no terminal?
+rules:
+  - id: ast-contains-call
+    options:
+      any:
+        - cli
+        - mcp
+        - connect

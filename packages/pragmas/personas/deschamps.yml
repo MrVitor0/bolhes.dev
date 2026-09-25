@@ -1,0 +1,18 @@
+id: deschamps
+aliases:
+  - tabnews
+kind: persona
+displayName: Filipe Deschamps
+handle: "@filipedeschamps"
+gesture: notícias de tecnologia e discussão comunitária
+requiresTake: true
+errorCode: BOLHES_DESCHAMPS_REQUIREMENT_FAILED
+errorMessage: isso ia melhor no TabNews
+refuses:
+  - galego
+voice: sóbrio, factual e comunitário
+quote: faz sentido. deixei no TabNews pra galera discutir.
+rules:
+  - id: take-max-length
+    options:
+      max: 280

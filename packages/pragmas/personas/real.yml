@@ -1,0 +1,24 @@
+id: real
+aliases:
+  - oficial
+  - acgfbr
+kind: persona
+displayName: Antonio / Real Oficial
+handle: "@acgfbr"
+gesture: distribuição, mídia e escala de produto
+requiresTake: true
+errorCode: BOLHES_REAL_REQUIREMENT_FAILED
+errorMessage: bonito no localhost; sem distribuição não é produto
+refuses: []
+voice: energia de distribuição e escala
+quote: compilou. e o criativo? e o pixel? e o corte?
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - share
+        - clip
+        - ogImage
+        - tracking
+        - cta
+        - copy

@@ -1,0 +1,21 @@
+id: fitfolio
+aliases:
+  - gobbi
+kind: persona
+displayName: Matheus Gobbi
+handle: "@matheusgobbidev"
+gesture: produto B2C, onboarding e retenção
+requiresTake: true
+errorCode: BOLHES_FITFOLIO_REQUIREMENT_FAILED
+errorMessage: isso não retém até dezembro
+refuses:
+  - linkedin
+voice: build in public e jornada do usuário
+quote: refatora o onboarding antes de postar o ARR.
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - onboarding
+        - habit
+        - retention

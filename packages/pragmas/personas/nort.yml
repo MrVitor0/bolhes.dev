@@ -1,0 +1,20 @@
+id: nort
+aliases: []
+kind: persona
+displayName: Ander
+handle: "@Anderodev"
+gesture: recrutamento e evidência de skill
+requiresTake: true
+errorCode: BOLHES_NORT_REQUIREMENT_FAILED
+errorMessage: mandou currículo de novo
+refuses: []
+voice: prova de habilidade antes do currículo
+quote: atualiza o LinkedIn depois. primeiro prova que sabe.
+rules:
+  - id: ast-contains-call
+    options:
+      any:
+        - score
+        - test
+        - apply
+        - proposal

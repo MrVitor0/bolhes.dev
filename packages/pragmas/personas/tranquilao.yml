@@ -1,0 +1,13 @@
+id: tranquilao
+aliases: []
+kind: persona
+displayName: Jovem Tranquilão
+handle: null
+gesture: tese contra a corrente
+requiresTake: true
+errorCode: BOLHES_TRANQUILAO_REQUIREMENT_FAILED
+errorMessage: "a bolha não criticou: take sem atrito"
+refuses: []
+voice: provocação calma
+quote: falei. vão me xingar nos comentários.
+rules: []

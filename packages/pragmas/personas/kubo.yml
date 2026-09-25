@@ -1,0 +1,21 @@
+id: kubo
+aliases:
+  - kubojs
+  - albuquerque
+kind: persona
+displayName: Albuquerque
+handle: "@byalbuquerquesz"
+gesture: scaffold, bootstrap e tipos no boundary
+requiresTake: true
+errorCode: BOLHES_KUBO_REQUIREMENT_FAILED
+errorMessage: cria o projeto na mão ainda
+refuses: []
+voice: começa por um scaffold que funciona
+quote: antes de discutir arquitetura, roda o create.
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - create
+        - template
+        - schema

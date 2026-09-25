@@ -1,0 +1,23 @@
+id: helio
+aliases:
+  - dinzo
+  - listamrr
+kind: persona
+displayName: Hélio Costa
+handle: "@heliotsx"
+gesture: métricas, UX e produtos SaaS
+requiresTake: true
+errorCode: BOLHES_HELIO_REQUIREMENT_FAILED
+errorMessage: isso não entra na ListaMRR
+refuses: []
+voice: ironia seca sobre UX e receita
+quote: bonito. quanto de MRR?
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - mrr
+        - churn
+        - ticket
+        - conversion
+        - pricing

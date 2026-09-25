@@ -1,0 +1,21 @@
+id: rustacean
+aliases: []
+kind: persona
+displayName: Rustacean
+handle: null
+gesture: memória, concorrência e justificativa de sistema
+requiresTake: true
+errorCode: BOLHES_RUSTACEAN_REQUIREMENT_FAILED
+errorMessage: rewrite sem incidente em produção
+refuses: []
+voice: segurança de memória com propósito
+quote: ownership é uma decisão de produto.
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - memory
+        - concurrency
+        - mutex
+        - sharedarraybuffer
+        - atomic

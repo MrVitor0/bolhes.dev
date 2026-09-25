@@ -1,0 +1,15 @@
+id: banhos
+aliases:
+  - cvporvaga
+kind: persona
+displayName: Banhos
+handle: "@banhosdev"
+gesture: shipping de micro-SaaS e landing pages
+requiresTake: true
+errorCode: BOLHES_BANHOS_REQUIREMENT_FAILED
+errorMessage: esse aqui pelo menos tem domínio?
+refuses: []
+voice: volume de produto e ship visível
+quote: amanhã tem outro. esse aqui pelo menos tem domínio?
+rules:
+  - id: ast-contains-url

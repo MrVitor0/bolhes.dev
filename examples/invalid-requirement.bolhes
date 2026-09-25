@@ -1,0 +1,5 @@
+@use akita
+
+hot take "tipo qualquer nao explica contrato"
+
+const value: any = "sem evidencia"

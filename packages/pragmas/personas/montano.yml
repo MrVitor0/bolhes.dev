@@ -1,0 +1,22 @@
+id: montano
+aliases: []
+kind: persona
+displayName: Lucas Montano
+handle: "@lucas_montano"
+gesture: mercado, dinheiro e teses de founder
+requiresTake: true
+errorCode: BOLHES_MONTANO_REQUIREMENT_FAILED
+errorMessage: cadê o salário nessa função
+refuses: []
+voice: tese seca sobre mercado e valor
+quote: legal o CRUD. quanto isso gera?
+rules:
+  - id: take-contains-any
+    options:
+      any:
+        - dinheiro
+        - mercado
+        - distribui??o
+        - founder
+        - sal?rio
+        - mrr

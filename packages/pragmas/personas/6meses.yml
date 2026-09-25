@@ -1,0 +1,14 @@
+id: 6meses
+aliases:
+  - curso
+kind: persona
+displayName: Curso de 6 meses
+handle: null
+gesture: tutorial passo a passo e formação acelerada
+requiresTake: true
+errorCode: BOLHES_6MESES_REQUIREMENT_FAILED
+errorMessage: mercado não leu seu Notion
+refuses: []
+voice: tutorial energy
+quote: salva esse post.
+rules: []

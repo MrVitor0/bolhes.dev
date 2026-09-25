@@ -1,0 +1,20 @@
+id: noctral
+aliases: []
+kind: persona
+displayName: Noctral
+handle: TBD
+gesture: validação de demanda por sinais de mercado
+requiresTake: true
+errorCode: BOLHES_NOCTRAL_REQUIREMENT_FAILED
+errorMessage: construiu sem validar a store
+refuses: []
+voice: demanda observável antes de feature
+quote: quem já cobra por isso na App Store?
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - store
+        - ranking
+        - search
+        - activeAd

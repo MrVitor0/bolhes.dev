@@ -1,0 +1,7 @@
+@use bolha
+
+hot take "um modulo bolhes no projeto TypeScript"
+
+export function getValue(): number {
+  return 42;
+}

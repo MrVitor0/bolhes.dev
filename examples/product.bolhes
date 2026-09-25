@@ -1,0 +1,9 @@
+@use guara
+
+hot take "deploy bom deixa regiao e resultado observaveis"
+
+export async def deployPreview()
+  const deployment = await deploy({ region: "sa-east-1" })
+  console.log(deployment.url)
+  deployment
+end

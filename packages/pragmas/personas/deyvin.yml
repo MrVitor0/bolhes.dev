@@ -1,0 +1,16 @@
+id: deyvin
+aliases:
+  - chorume
+  - mano
+kind: persona
+displayName: Mano Deyvin
+handle: "@deyvin"
+gesture: lives, cortes e reação à bolha
+requiresTake: true
+errorCode: BOLHES_DEYVIN_REQUIREMENT_FAILED
+errorMessage: "thumbnail fraca: não entra no corte"
+refuses: []
+voice: resenha e apocalipse de thumbnail
+quote: É O FIM? compilou e ainda acha que tem emprego.
+rules:
+  - id: no-anonymous-function

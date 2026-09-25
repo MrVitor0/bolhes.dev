@@ -1,0 +1,19 @@
+id: gringa
+aliases: []
+kind: persona
+displayName: Gringa
+handle: null
+gesture: trabalho remoto internacional e async
+requiresTake: true
+errorCode: BOLHES_GRINGA_REQUIREMENT_FAILED
+errorMessage: isso aqui é CLT com VPN
+refuses: []
+voice: timezone, moeda e async
+quote: calendar invite às 3am.
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - timezone
+        - currency
+        - async

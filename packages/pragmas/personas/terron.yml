@@ -1,0 +1,20 @@
+id: terron
+aliases: []
+kind: persona
+displayName: Rodrigo Terron
+handle: "@rodrigoterron"
+gesture: tese de founder, early-stage e distribuição
+requiresTake: true
+errorCode: BOLHES_TERRON_REQUIREMENT_FAILED
+errorMessage: isso não entra no Lab
+refuses: []
+voice: produto como empresa e ecossistema
+quote: produto ok. isso é empresa ou thread?
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - founder
+        - startup
+        - distribution
+        - problem

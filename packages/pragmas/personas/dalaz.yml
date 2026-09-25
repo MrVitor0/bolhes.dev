@@ -1,0 +1,21 @@
+id: dalaz
+aliases: []
+kind: persona
+displayName: Dalaz
+handle: TBD
+gesture: design de produto e hierarquia visual
+requiresTake: true
+errorCode: BOLHES_DALAZ_REQUIREMENT_FAILED
+errorMessage: isso é template do v0
+refuses:
+  - linkedin
+voice: hierarquia visual e estados com cuidado
+quote: funciona. não dá vontade de usar.
+rules:
+  - id: ast-contains-identifier
+    options:
+      any:
+        - typography
+        - spacing
+        - contrast
+        - emptyState

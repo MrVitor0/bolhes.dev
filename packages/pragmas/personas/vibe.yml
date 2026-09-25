@@ -1,0 +1,19 @@
+id: vibe
+aliases:
+  - vibecoding
+kind: persona
+displayName: Vibe coding
+handle: null
+gesture: prompt e prototipação assistida
+requiresTake: true
+errorCode: BOLHES_VIBE_REQUIREMENT_FAILED
+errorMessage: cadê o prompt?
+refuses: []
+voice: prompt no lugar de cerimônia
+quote: o PR é um print do Composer.
+rules:
+  - id: take-or-comment-marker
+    options:
+      any:
+        - prompt
+        - cursor
