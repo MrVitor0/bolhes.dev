@@ -21,6 +21,6 @@ pnpm bolhes build examples/localhost-nao-paga.bolhes --out-dir dist
 
 ## Estado do compiler
 
-A API `compile(source, options)` e o CLI suportam atualmente a sintaxe de compatibilidade JS/TS, diretivas de cabeçalho `@use` e takes de metadado `hot take "..."`. O compiler remove essas declarações e emite o módulo usando o transpiler do TypeScript. O registry contém os 30 IDs do inventário do plano.
+A API publica `compile(source, options)` e o CLI suportam o modo de compatibilidade JS/TS, diretivas `@use` e takes `hot take`. O registry canonico YAML contem os 30 pragmas; o build valida os dados e gera JSON. Regras declarativas aplicam predicates estruturais a um subconjunto de personas.
 
-A sintaxe padrão Ruby/Python (`def`, `class`, `end`, `@campo`), checagens específicas de requisitos além de take obrigatório, projeto multi-arquivo, source maps remapeados e Worker web ainda não estão implementados. Consulte [`sdd/roadmap.md`](sdd/roadmap.md).
+O parser Ruby/Python completo, projeto multi-arquivo, source maps remapeados e Worker web ainda estao pendentes. O registry documenta gestos e exemplos, mas os predicates implementados so verificam evidencia sintatica; consulte [sdd/roadmap.md](sdd/roadmap.md).

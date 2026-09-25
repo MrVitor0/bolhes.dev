@@ -1,6 +1,18 @@
 {
-  "name": "@bolhes/pragmas", "version": "0.1.0", "private": true,
-  "type": "module", "exports": { ".": "./dist/index.js", "./registry.json": "./registry.json" },
-  "scripts": { "build": "tsc -p tsconfig.json", "test": "node --test" },
-  "dependencies": { "@bolhes/shared": "workspace:*" }
+  "name": "@bolhes/pragmas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./registry.json": "./registry.json"
+  },
+  "scripts": {
+    "build": "node scripts/build-registry.mjs && tsc -p tsconfig.json",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@bolhes/shared": "workspace:*",
+    "yaml": "^2.9.1"
+  }
 }

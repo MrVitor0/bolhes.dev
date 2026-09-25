@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { registry, resolvePragma } from "@bolhes/pragmas";
-import type { Diagnostic, SocialArtifact } from "@bolhes/shared";
+import type { Diagnostic, RequirementRule, SocialArtifact } from "@bolhes/shared";
 
 export interface CompileOptions {
   filename?: string;
@@ -41,7 +41,10 @@ export function compile(source: string, options: CompileOptions = {}): CompileRe
       const name = pragma[1];
       const resolved = resolvePragma(name);
       if (!resolved) diagnostics.push({ code: "BOLHES_UNKNOWN_PRAGMA", severity: "error", message: `pragma desconhecido: ${name}`, span: position(source, offset) });
-      else pragmaNames.push(resolved.id);
+      else {
+        if (pragmaNames.includes(resolved.id)) diagnostics.push({ code: "BOLHES_DUPLICATE_PRAGMA", severity: "warning", message: `@${resolved.id} jÃ¡ foi declarado`, span: position(source, offset) });
+        else pragmaNames.push(resolved.id);
+      }
       offset += line.length;
       continue;
     }
@@ -94,9 +97,41 @@ export function compile(source: string, options: CompileOptions = {}): CompileRe
   }
   for (const removal of removals.reverse()) body = body.slice(0, removal.start) + body.slice(removal.start, removal.end).replace(/[^\r\n]/g, " ") + body.slice(removal.end);
 
+  const sourceFile = ts.createSourceFile(options.filename ?? "module.bolhes", body, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const identifiers = new Set<string>();
+  const calls = new Set<string>();
+  let hasAny = false;
+  let hasType = false;
+  let hasAnonymousFunction = false;
+  let hasNumber = false;
+  let hasUrl = false;
+  const visit = (node: ts.Node) => {
+    if (ts.isIdentifier(node)) identifiers.add(node.text.toLowerCase());
+    if (node.kind === ts.SyntaxKind.AnyKeyword) hasAny = true;
+    if (ts.isTypeNode(node)) hasType = true;
+    if (ts.isArrowFunction(node) || (ts.isFunctionExpression(node) && !node.name)) hasAnonymousFunction = true;
+    if (ts.isNumericLiteral(node)) hasNumber = true;
+    if (ts.isStringLiteralLike(node) && /^https?:\/\//i.test(node.text)) hasUrl = true;
+    if (ts.isCallExpression(node)) {
+      const expression = node.expression;
+      if (ts.isIdentifier(expression)) calls.add(expression.text.toLowerCase());
+      else if (ts.isPropertyAccessExpression(expression)) calls.add(expression.name.text.toLowerCase());
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sourceFile);
+  const commentScanner = ts.createScanner(ts.ScriptTarget.Latest, false, ts.LanguageVariant.Standard, body);
+  const comments: string[] = [];
+  while (commentScanner.scan() !== ts.SyntaxKind.EndOfFileToken) {
+    const kind = commentScanner.getToken();
+    if (kind === ts.SyntaxKind.SingleLineCommentTrivia || kind === ts.SyntaxKind.MultiLineCommentTrivia) comments.push(commentScanner.getTokenText().toLowerCase());
+  }
+
   for (const id of active) {
     const def = registry.pragmas.find((p) => p.id === id)!;
-    if (def.requiresTake && takes.length === 0) diagnostics.push({ code: def.errorCode, severity: "error", message: def.errorMessage });
+    if ((def.requiresTake && takes.length === 0) || def.rules.some((rule) => !evaluateRule(rule, { takes: takes.map((take) => take.text), identifiers, calls, hasAny, hasType, hasAnonymousFunction, hasNumber, hasUrl, comments }))) {
+      diagnostics.push({ code: def.errorCode, severity: "error", message: def.errorMessage });
+    }
   }
 
   if (diagnostics.some((d) => d.severity === "error")) return { ok: false, target, pragmas: active, diagnostics };
@@ -115,4 +150,36 @@ export function compile(source: string, options: CompileOptions = {}): CompileRe
   const code = target === "ts" ? body : tsResult.outputText;
   const social: SocialArtifact = { schemaVersion: 1, compilerVersion: version, pragmas: active, takes, easterEggs: [] };
   return { ok: true, code, target, pragmas: active, social, diagnostics };
+}
+
+interface RuleFacts {
+  takes: string[];
+  identifiers: Set<string>;
+  calls: Set<string>;
+  hasAny: boolean;
+  hasType: boolean;
+  hasAnonymousFunction: boolean;
+  hasNumber: boolean;
+  hasUrl: boolean;
+  comments: string[];
+}
+
+function evaluateRule(rule: RequirementRule, facts: RuleFacts): boolean {
+  const options = rule.options ?? {};
+  const any = Array.isArray(options.any) ? options.any.map((value) => String(value).toLowerCase()) : [];
+  switch (rule.id) {
+    case "no-any": return !facts.hasAny;
+    case "requires-type": return facts.hasType;
+    case "no-anonymous-function": return !facts.hasAnonymousFunction;
+    case "ast-contains-call": return any.some((name) => facts.calls.has(name));
+    case "ast-contains-identifier": return any.some((name) => facts.identifiers.has(name));
+    case "ast-contains-url": return facts.hasUrl;
+    case "ast-contains-number": return facts.hasNumber;
+    case "take-contains-any": return facts.takes.some((take) => any.some((needle) => take.toLowerCase().includes(needle)));
+    case "comment-marker": return facts.comments.some((comment) => any.some((needle) => comment.includes(needle)));
+    case "take-or-comment-marker": return facts.takes.some((take) => any.some((needle) => take.toLowerCase().includes(needle))) || facts.comments.some((comment) => any.some((needle) => comment.includes(needle)));
+    case "take-max-length": return facts.takes.length > 0 && facts.takes.every((take) => take.length <= Number(options.max));
+    case "take-question": return facts.takes.some((take) => take.includes("?"));
+    default: return false;
+  }
 }

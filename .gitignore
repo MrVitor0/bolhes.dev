@@ -6,6 +6,3 @@ dist/
 *.tsbuildinfo
 *.social.json
 *.quote.txt
-
-# high-level sdd
-/sdd

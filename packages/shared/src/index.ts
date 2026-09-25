@@ -23,11 +23,17 @@ export interface PragmaDefinition {
   handle: string | null;
   gesture: string;
   requiresTake: boolean;
+  rules: RequirementRule[];
   errorCode: string;
   errorMessage: string;
   refuses: string[];
   voice: string;
   quote: string;
+}
+
+export interface RequirementRule {
+  id: string;
+  options?: Record<string, unknown>;
 }
 
 export interface Registry {

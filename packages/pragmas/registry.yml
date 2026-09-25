@@ -1,0 +1,587 @@
+version: 0.1.0
+pragmas:
+  - id: bolha
+    aliases: []
+    kind: persona
+    displayName: Bolha
+    handle: null
+    gesture: "TL média: takes e código"
+    requiresTake: true
+    errorCode: BOLHES_TAKE_REQUIRED
+    errorMessage: isso não gera quote-tweet
+    refuses: []
+    voice: minúscula, direta e afetuosa
+    quote: compilou. agora posta.
+    rules: []
+  - id: akita
+    aliases:
+      - akitando
+    kind: persona
+    displayName: Fábio Akita
+    handle: "@AkitaOnRails"
+    gesture: fundamentos, história da computação e crítica ao hype
+    requiresTake: true
+    errorCode: BOLHES_AKITA_REQUIREMENT_FAILED
+    errorMessage: isso é curso de 6 meses compilado
+    refuses:
+      - vibe
+      - linkedin
+      - 6meses
+    voice: professoral, fundamentos antes do hype
+    quote: se todo mundo te ama, ninguém liga pra você. inclusive esse hello world.
+    rules:
+      - id: requires-type
+      - id: no-any
+  - id: deschamps
+    aliases:
+      - tabnews
+    kind: persona
+    displayName: Filipe Deschamps
+    handle: "@filipedeschamps"
+    gesture: notícias de tecnologia e discussão comunitária
+    requiresTake: true
+    errorCode: BOLHES_DESCHAMPS_REQUIREMENT_FAILED
+    errorMessage: isso ia melhor no TabNews
+    refuses:
+      - galego
+    voice: sóbrio, factual e comunitário
+    quote: faz sentido. deixei no TabNews pra galera discutir.
+    rules:
+      - id: take-max-length
+        options:
+          max: 280
+  - id: deyvin
+    aliases:
+      - chorume
+      - mano
+    kind: persona
+    displayName: Mano Deyvin
+    handle: "@deyvin"
+    gesture: lives, cortes e reação à bolha
+    requiresTake: true
+    errorCode: BOLHES_DEYVIN_REQUIREMENT_FAILED
+    errorMessage: "thumbnail fraca: não entra no corte"
+    refuses: []
+    voice: resenha e apocalipse de thumbnail
+    quote: É O FIM? compilou e ainda acha que tem emprego.
+    rules:
+      - id: no-anonymous-function
+  - id: montano
+    aliases: []
+    kind: persona
+    displayName: Lucas Montano
+    handle: "@lucas_montano"
+    gesture: mercado, dinheiro e teses de founder
+    requiresTake: true
+    errorCode: BOLHES_MONTANO_REQUIREMENT_FAILED
+    errorMessage: cadê o salário nessa função
+    refuses: []
+    voice: tese seca sobre mercado e valor
+    quote: legal o CRUD. quanto isso gera?
+    rules:
+      - id: take-contains-any
+        options:
+          any:
+            - dinheiro
+            - mercado
+            - distribui??o
+            - founder
+            - sal?rio
+            - mrr
+  - id: galego
+    aliases: []
+    kind: persona
+    displayName: Augusto Galego
+    handle: "@RealGalego"
+    gesture: lore satírico da bolha
+    requiresTake: true
+    errorCode: BOLHES_GALEGO_REQUIREMENT_FAILED
+    errorMessage: você está interagindo com um bot
+    refuses: []
+    voice: revelação satírica, nunca afirmação factual
+    quote: coincidência demais esse build passar de primeira.
+    rules:
+      - id: comment-marker
+        options:
+          any:
+            - bot
+  - id: tranquilao
+    aliases: []
+    kind: persona
+    displayName: Jovem Tranquilão
+    handle: null
+    gesture: tese contra a corrente
+    requiresTake: true
+    errorCode: BOLHES_TRANQUILAO_REQUIREMENT_FAILED
+    errorMessage: "a bolha não criticou: take sem atrito"
+    refuses: []
+    voice: provocação calma
+    quote: falei. vão me xingar nos comentários.
+    rules: []
+  - id: real
+    aliases:
+      - oficial
+      - acgfbr
+    kind: persona
+    displayName: Antonio / Real Oficial
+    handle: "@acgfbr"
+    gesture: distribuição, mídia e escala de produto
+    requiresTake: true
+    errorCode: BOLHES_REAL_REQUIREMENT_FAILED
+    errorMessage: bonito no localhost; sem distribuição não é produto
+    refuses: []
+    voice: energia de distribuição e escala
+    quote: compilou. e o criativo? e o pixel? e o corte?
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - share
+            - clip
+            - ogImage
+            - tracking
+            - cta
+            - copy
+  - id: fitfolio
+    aliases:
+      - gobbi
+    kind: persona
+    displayName: Matheus Gobbi
+    handle: "@matheusgobbidev"
+    gesture: produto B2C, onboarding e retenção
+    requiresTake: true
+    errorCode: BOLHES_FITFOLIO_REQUIREMENT_FAILED
+    errorMessage: isso não retém até dezembro
+    refuses:
+      - linkedin
+    voice: build in public e jornada do usuário
+    quote: refatora o onboarding antes de postar o ARR.
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - onboarding
+            - habit
+            - retention
+  - id: helio
+    aliases:
+      - dinzo
+      - listamrr
+    kind: persona
+    displayName: Hélio Costa
+    handle: "@heliotsx"
+    gesture: métricas, UX e produtos SaaS
+    requiresTake: true
+    errorCode: BOLHES_HELIO_REQUIREMENT_FAILED
+    errorMessage: isso não entra na ListaMRR
+    refuses: []
+    voice: ironia seca sobre UX e receita
+    quote: bonito. quanto de MRR?
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - mrr
+            - churn
+            - ticket
+            - conversion
+            - pricing
+  - id: conty
+    aliases:
+      - rivera
+    kind: persona
+    displayName: Conty
+    handle: "@onicolasrivera"
+    gesture: creator economy, missões e loops sociais
+    requiresTake: true
+    errorCode: BOLHES_CONTY_REQUIREMENT_FAILED
+    errorMessage: missão sem recompensa não entrega UGC de graça
+    refuses: []
+    voice: milestones e convocação da comunidade
+    quote: isso aqui vira missão no app.
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - mission
+            - reward
+            - ugc
+            - share
+  - id: arara
+    aliases:
+      - ararahq
+    kind: persona
+    displayName: AraraHQ
+    handle: "@ararahq"
+    gesture: infra para dev, CLI, MCP e integrações
+    requiresTake: true
+    errorCode: BOLHES_ARARA_REQUIREMENT_FAILED
+    errorMessage: cadê o comando no terminal?
+    refuses: []
+    voice: DX em passos curtos
+    quote: bonito o dashboard. cadê o comando no terminal?
+    rules:
+      - id: ast-contains-call
+        options:
+          any:
+            - cli
+            - mcp
+            - connect
+  - id: banhos
+    aliases:
+      - cvporvaga
+    kind: persona
+    displayName: Banhos
+    handle: "@banhosdev"
+    gesture: shipping de micro-SaaS e landing pages
+    requiresTake: true
+    errorCode: BOLHES_BANHOS_REQUIREMENT_FAILED
+    errorMessage: esse aqui pelo menos tem domínio?
+    refuses: []
+    voice: volume de produto e ship visível
+    quote: amanhã tem outro. esse aqui pelo menos tem domínio?
+    rules:
+      - id: ast-contains-url
+  - id: otto
+    aliases: []
+    kind: persona
+    displayName: Otto
+    handle: TBD
+    gesture: agente, worker, cron ou automação autônoma
+    requiresTake: true
+    errorCode: BOLHES_OTTO_REQUIREMENT_FAILED
+    errorMessage: isso ainda precisa de humano no meio
+    refuses: []
+    voice: pouco marketing, muito deixou rodando
+    quote: deixei rodando.
+    rules:
+      - id: ast-contains-call
+        options:
+          any:
+            - worker
+            - cron
+            - job
+            - agent
+  - id: vibe
+    aliases:
+      - vibecoding
+    kind: persona
+    displayName: Vibe coding
+    handle: null
+    gesture: prompt e prototipação assistida
+    requiresTake: true
+    errorCode: BOLHES_VIBE_REQUIREMENT_FAILED
+    errorMessage: cadê o prompt?
+    refuses: []
+    voice: prompt no lugar de cerimônia
+    quote: o PR é um print do Composer.
+    rules:
+      - id: take-or-comment-marker
+        options:
+          any:
+            - prompt
+            - cursor
+  - id: linkedin
+    aliases:
+      - faang
+    kind: persona
+    displayName: LinkedIn
+    handle: null
+    gesture: anúncio profissional e autopromoção
+    requiresTake: true
+    errorCode: BOLHES_LINKEDIN_REQUIREMENT_FAILED
+    errorMessage: cringe detectado
+    refuses:
+      - akita
+      - fitfolio
+    voice: anúncio com emoji e CTA
+    quote: seguimos construindo.
+    rules: []
+  - id: 6meses
+    aliases:
+      - curso
+    kind: persona
+    displayName: Curso de 6 meses
+    handle: null
+    gesture: tutorial passo a passo e formação acelerada
+    requiresTake: true
+    errorCode: BOLHES_6MESES_REQUIREMENT_FAILED
+    errorMessage: mercado não leu seu Notion
+    refuses: []
+    voice: tutorial energy
+    quote: salva esse post.
+    rules: []
+  - id: junior
+    aliases: []
+    kind: persona
+    displayName: Junior
+    handle: null
+    gesture: dúvida técnica honesta
+    requiresTake: true
+    errorCode: BOLHES_JUNIOR_REQUIREMENT_FAILED
+    errorMessage: "pede ajuda direito: cola o stack trace"
+    refuses: []
+    voice: curiosidade e pedido de ajuda
+    quote: alguém consegue dar uma luz?
+    rules:
+      - id: take-question
+  - id: amargurado
+    aliases: []
+    kind: persona
+    displayName: Amargurado
+    handle: null
+    gesture: pessimismo justificado por fatos do mercado
+    requiresTake: true
+    errorCode: BOLHES_AMARGURADO_REQUIREMENT_FAILED
+    errorMessage: amargura sem fonte
+    refuses: []
+    voice: pessimismo seco
+    quote: tinha vaga. tinha.
+    rules:
+      - id: take-contains-any
+        options:
+          any:
+            - layoff
+            - vaga
+            - demiss?o
+            - layoffs
+  - id: palestrinha
+    aliases: []
+    kind: persona
+    displayName: Palestrinha
+    handle: null
+    gesture: números e argumentos de apresentação
+    requiresTake: true
+    errorCode: BOLHES_PALESTRINHA_REQUIREMENT_FAILED
+    errorMessage: slide não sobe pra produção
+    refuses: []
+    voice: argumentação em tópicos
+    quote: deixa eu contextualizar.
+    rules:
+      - id: ast-contains-number
+  - id: gringa
+    aliases: []
+    kind: persona
+    displayName: Gringa
+    handle: null
+    gesture: trabalho remoto internacional e async
+    requiresTake: true
+    errorCode: BOLHES_GRINGA_REQUIREMENT_FAILED
+    errorMessage: isso aqui é CLT com VPN
+    refuses: []
+    voice: timezone, moeda e async
+    quote: calendar invite às 3am.
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - timezone
+            - currency
+            - async
+  - id: rustacean
+    aliases: []
+    kind: persona
+    displayName: Rustacean
+    handle: null
+    gesture: memória, concorrência e justificativa de sistema
+    requiresTake: true
+    errorCode: BOLHES_RUSTACEAN_REQUIREMENT_FAILED
+    errorMessage: rewrite sem incidente em produção
+    refuses: []
+    voice: segurança de memória com propósito
+    quote: ownership é uma decisão de produto.
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - memory
+            - concurrency
+            - mutex
+            - sharedarraybuffer
+            - atomic
+  - id: guara
+    aliases:
+      - bona
+      - guaracloud
+    kind: persona
+    displayName: Victor Bona
+    handle: "@BonaVictor"
+    gesture: "PaaS brasileira: deploy, região, cobrança ou observabilidade"
+    requiresTake: true
+    errorCode: BOLHES_GUARA_REQUIREMENT_FAILED
+    errorMessage: isso não sai do localhost
+    refuses:
+      - gringa
+    voice: infra que leva a aplicação para produção
+    quote: bonito o next. cadê o deploy em real com log?
+    rules:
+      - id: ast-contains-call
+        options:
+          any:
+            - deploy
+            - region
+            - billing
+            - observability
+  - id: kubo
+    aliases:
+      - kubojs
+      - albuquerque
+    kind: persona
+    displayName: Albuquerque
+    handle: "@byalbuquerquesz"
+    gesture: scaffold, bootstrap e tipos no boundary
+    requiresTake: true
+    errorCode: BOLHES_KUBO_REQUIREMENT_FAILED
+    errorMessage: cria o projeto na mão ainda
+    refuses: []
+    voice: começa por um scaffold que funciona
+    quote: antes de discutir arquitetura, roda o create.
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - create
+            - template
+            - schema
+  - id: dalaz
+    aliases: []
+    kind: persona
+    displayName: Dalaz
+    handle: TBD
+    gesture: design de produto e hierarquia visual
+    requiresTake: true
+    errorCode: BOLHES_DALAZ_REQUIREMENT_FAILED
+    errorMessage: isso é template do v0
+    refuses:
+      - linkedin
+    voice: hierarquia visual e estados com cuidado
+    quote: funciona. não dá vontade de usar.
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - typography
+            - spacing
+            - contrast
+            - emptyState
+  - id: noctral
+    aliases: []
+    kind: persona
+    displayName: Noctral
+    handle: TBD
+    gesture: validação de demanda por sinais de mercado
+    requiresTake: true
+    errorCode: BOLHES_NOCTRAL_REQUIREMENT_FAILED
+    errorMessage: construiu sem validar a store
+    refuses: []
+    voice: demanda observável antes de feature
+    quote: quem já cobra por isso na App Store?
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - store
+            - ranking
+            - search
+            - activeAd
+  - id: himetrica
+    aliases: []
+    kind: persona
+    displayName: Himetrica
+    handle: "@wescld"
+    gesture: analytics, eventos e decisões baseadas em uso
+    requiresTake: true
+    errorCode: BOLHES_HIMETRICA_REQUIREMENT_FAILED
+    errorMessage: quem usa isso você não sabe
+    refuses: []
+    voice: pergunta pelos dados de uso
+    quote: shipou. e quem de fato clicou?
+    rules:
+      - id: ast-contains-call
+        options:
+          any:
+            - track
+            - event
+            - identify
+            - profile
+  - id: luke
+    aliases: []
+    kind: persona
+    displayName: Luke Berry
+    handle: "@LukeberryPi"
+    gesture: interface e cuidado visual
+    requiresTake: true
+    errorCode: BOLHES_LUKE_REQUIREMENT_FAILED
+    errorMessage: não passa no CSS 2wind
+    refuses: []
+    voice: detalhe visual, estado e tipografia
+    quote: o código tá ok. a tela pede desculpa.
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - motion
+            - typography
+            - theme
+            - emptyState
+  - id: terron
+    aliases: []
+    kind: persona
+    displayName: Rodrigo Terron
+    handle: "@rodrigoterron"
+    gesture: tese de founder, early-stage e distribuição
+    requiresTake: true
+    errorCode: BOLHES_TERRON_REQUIREMENT_FAILED
+    errorMessage: isso não entra no Lab
+    refuses: []
+    voice: produto como empresa e ecossistema
+    quote: produto ok. isso é empresa ou thread?
+    rules:
+      - id: ast-contains-identifier
+        options:
+          any:
+            - founder
+            - startup
+            - distribution
+            - problem
+  - id: nort
+    aliases: []
+    kind: persona
+    displayName: Ander
+    handle: "@Anderodev"
+    gesture: recrutamento e evidência de skill
+    requiresTake: true
+    errorCode: BOLHES_NORT_REQUIREMENT_FAILED
+    errorMessage: mandou currículo de novo
+    refuses: []
+    voice: prova de habilidade antes do currículo
+    quote: atualiza o LinkedIn depois. primeiro prova que sabe.
+    rules:
+      - id: ast-contains-call
+        options:
+          any:
+            - score
+            - test
+            - apply
+            - proposal
+conflicts:
+  - - akita
+    - vibe
+  - - akita
+    - linkedin
+  - - akita
+    - 6meses
+  - - guara
+    - gringa
+  - - noctral
+    - 6meses
+  - - nort
+    - banhos
+  - - luke
+    - dalaz
+  - - himetrica
+    - helio
+  - - terron
+    - vibe
+  - - kubo
+    - akita
